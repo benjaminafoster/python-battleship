@@ -4,11 +4,13 @@ Objects:
     - Ships:
         - 1x Aircraft Carrier
             - 5 Posts
-        - 2x Battleships
+        - 1x Battleship
             - 4 posts
-        - 2x Destroyer
+        - 1x Cruiser
             - 3 posts
-        = Submarine
+        - 1x Submarine
+            - 3 posts
+        - 1x Destroyer
             - 2 posts
 
     - Player Boards:
