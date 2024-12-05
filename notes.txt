@@ -1,0 +1,33 @@
+What we need:
+
+Objects: 
+    - Ships:
+        - 1x Aircraft Carrier
+            - 5 Posts
+        - 2x Battleships
+            - 4 posts
+        - 2x Destroyer
+            - 3 posts
+        = Submarine
+            - 2 posts
+
+    - Player Boards:
+        - 10x10 matrix
+            - A-J on Vertical Axis
+            - 0-9 on Horizontal Axis
+        - Attack Panel
+            - Shows hits and misses on opponent ships
+        - Damage Panel
+            - Shows locations of friendly ships
+            - Shows hits and misses on friendly ships
+
+Functions:
+    - Place ships
+        - Start with random placement. In future versions, users can place their ships (not as user friendly on CLI)
+    - Request shot
+        - Request shot using a string such as "A6" or "J0"
+
+Future features:
+    - Scoring system for...
+    - User profiles with high scores
+    - Single vs. multi-player
