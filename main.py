@@ -24,6 +24,15 @@ class Ship:
         return f'The type of ship you selected is a {self.type} which has {self.post_num} posts.'
     
     def placeShip(self):
+        """
+            Places a ship by first asking user for desired ship coordinates, then assigning all coordinates included within that coordinate range.
+
+            Parameters:
+                none
+            
+            Returns:
+                Adds coordinates to self.ship_coordinates
+        """
         while True:
             coordinates = getShipCoordinates()
             is_valid_ship_coordinates = checkShipCoordinates(coordinates, self.post_num)
@@ -34,9 +43,19 @@ class Ship:
                 if coordinates[0][0] == coordinates[1][0]: # First character (letter) matches
                     static_first_character = coordinates[0][0]
                     initial_second_character = int(coordinates[0][1])
-                    for index in range(0,self.post_num):
-                        # Pick back up here in adding coordinates to the ship placement
-                        pass
+                    final_second_character = int(coordinates[1][1])
+                    # This is only a partial solution. Won't include all coordinate numbers 
+                    for num in range(initial_second_character,final_second_character+1):
+                        # No need to worry about breaking bounds of board because checkShipCoordinates does this
+                        self.ship_coordinates.append(f'{static_first_character}{num}')
+                else:
+                    allowed_letters = list(string.ascii_uppercase[:5])
+                    static_second_character = coordinates[0][1]
+                    initial_first_character_index = allowed_letters.index(coordinates[0][0])
+                    final_first_character_index = allowed_letters.index(coordinates[1][0])
+                    for index in range(initial_first_character_index,final_first_character_index+1):
+                        self.ship_coordinates.append(f'{allowed_letters[index]}{static_second_character}')
+                print(self.ship_coordinates)
                 break
             else:
                 print(colored('Coordinates are invalid for this ship', 'red'))
@@ -91,10 +110,10 @@ def checkShipCoordinates(coordinates:list, ship_posts:int) -> bool:
         Checks the distance between two coordinates and compares it to the number of posts for a ship. This is an important step in confirming ship placement at the start of the game.
 
         Parameters:
-        : list : coordinates - raw coordinate strings passed from CLI during getShipCoordinates
+            : list : coordinates - raw coordinate strings passed from CLI during getShipCoordinates
 
         Return:
-        : bool: True if the distance matches number of posts for a ship, False if it does not.
+            : bool: True if the distance matches number of posts for a ship, False if it does not.
     """
     values_dict = {"A":0,"B":1,"C":2,"D":3,"E":4,"0":0,"1":1,"2":2,"3":3,"4":4}
 
@@ -121,6 +140,19 @@ def checkShipCoordinates(coordinates:list, ship_posts:int) -> bool:
 
         #continue
 
-f_carrier = Ship("carrier")
+""" f_carrier = Ship("carrier")
 print(f_carrier)
-f_carrier.placeShip()
+f_carrier.placeShip() """
+
+f_battleship = Ship("battleship")
+print(f_battleship)
+f_battleship.placeShip()
+print(colored(f'The new ship coordinates are: {f_battleship.ship_coordinates}','green'))
+
+""" f_cruiser = Ship("cruiser")
+print(f_cruiser)
+f_cruiser.placeShip()
+
+f_submarine = Ship("submarine")
+print(f_submarine)
+f_submarine.placeShip() """
