@@ -33,3 +33,10 @@ Future features:
     - Scoring system for...
     - User profiles with high scores
     - Single vs. multi-player
+
+
+Thoughts:
+    12/5/2024:
+        - Flow of ship initialization: define intended ship -> define desired start and end coordinates -> validate coordinates -> pass valid coordinates into ship initialization
+            - This will require me to automatically fill all coordinates between start and end
+            - Also then need to create a check to make sure that ships don't overlap
