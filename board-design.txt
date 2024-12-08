@@ -38,3 +38,12 @@ Damage Board
    |      |      |      |      |     |
  4 |      |      |      |      |     |
    |______|______|______|______|_____|
+
+
+POC Board
+  A B C D E
+1 - - - - -      X = hit
+2 - - - - -      O = miss
+3 - - - - -      - = action not taken
+4 - - - - -
+5 - - - - -

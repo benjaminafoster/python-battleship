@@ -3,6 +3,39 @@ from termcolor import colored
 import string
 import math
 
+# Define a class to represent a board
+class Board:
+    def __init__(self, playerName:str):
+        self.playerName = playerName
+        self.board = []
+        self.board_size = 5
+        self.board_spaces = 25
+        self.head = "   A B C D E"
+        self.createBoard()
+        
+
+    def __repr__(self):
+        return f'{self.playerName} Board'
+    
+    def createBoard(self):
+        """
+            Creates a board with a size of 5x5. The board is a list of lists.
+        """
+        for i in range(0, self.board_spaces):
+            self.board.append(' -')
+        print(self.board)
+    
+    def displayBoard(self):
+        """
+            Displays the board in the CLI.
+        """
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(self.head)
+        for row in range(0, self.board_size):
+            # More to do here.
+            print(row, "".join(self.board[(row*5):(row*5)+5]))
+
+# Define a class to represent a ship
 class Ship:
     def __init__(self, type:str):
         self.type = type
@@ -18,7 +51,6 @@ class Ship:
         
         self.ship_coordinates = []
         
-
 
     def __repr__(self):
         return f'The type of ship you selected is a {self.type} which has {self.post_num} posts.'
@@ -44,7 +76,7 @@ class Ship:
                     static_first_character = coordinates[0][0]
                     initial_second_character = int(coordinates[0][1])
                     final_second_character = int(coordinates[1][1])
-                    # This is only a partial solution. Won't include all coordinate numbers 
+                    # This is only a partial solution. Won't include all coordinate numbers or the order in which they are given (i.e "A4" to "A0")
                     for num in range(initial_second_character,final_second_character+1):
                         # No need to worry about breaking bounds of board because checkShipCoordinates does this
                         self.ship_coordinates.append(f'{static_first_character}{num}')
@@ -61,7 +93,7 @@ class Ship:
                 print(colored('Coordinates are invalid for this ship', 'red'))
                 continue
 
-
+# FUNCTIONS THAT HANDLE COORDINATE VALIDATION (USED IN BOTH SHIP PLACEMENT AND ATTACKS)
 
 def validateCoordinate(coordinate:str) -> bool:
     allowed_letters = list(string.ascii_uppercase[:5])
@@ -140,14 +172,36 @@ def checkShipCoordinates(coordinates:list, ship_posts:int) -> bool:
 
         #continue
 
+# FUNCTIONS THAT HANDLE BOARD MANIPULATION
+# For now, commitFire should only send a fire action; checking for hit comes later.
+def commitFire(coordinate:str, board:object):
+    allowed_letters = list(string.ascii_uppercase[:5])
+    allowed_ints = ["0", "1", "2", "3", "4"]
+    coordinate_list = []
+    for integer in allowed_ints:
+        for letter in allowed_letters:
+            coordinate_list.append(f'{letter}{integer}')
+    board_index = coordinate_list.index(coordinate)
+    board.board[board_index] = " X"
+
+
+# TESTING BOARD
+f_board = Board("Friendly")
+#f_board.displayBoard()
+commitFire("E1",f_board)
+commitFire("B4",f_board)
+commitFire("A0",f_board)
+f_board.displayBoard()
+
+# TESTING SHIPS
 """ f_carrier = Ship("carrier")
 print(f_carrier)
 f_carrier.placeShip() """
 
-f_battleship = Ship("battleship")
+""" f_battleship = Ship("battleship")
 print(f_battleship)
 f_battleship.placeShip()
-print(colored(f'The new ship coordinates are: {f_battleship.ship_coordinates}','green'))
+print(colored(f'The new ship coordinates are: {f_battleship.ship_coordinates}','green')) """
 
 """ f_cruiser = Ship("cruiser")
 print(f_cruiser)
@@ -156,3 +210,4 @@ f_cruiser.placeShip()
 f_submarine = Ship("submarine")
 print(f_submarine)
 f_submarine.placeShip() """
+
