@@ -12,10 +12,12 @@ class Board:
         self.board_spaces = 25
         self.head = "   A B C D E"
         self.createBoard()
+        self.all_ship_coordinates = []
+        self.damage_count = 0
         
 
     def __repr__(self):
-        return f'{self.playerName} Board'
+        return f"{self.playerName}'s Board"
     
     def createBoard(self):
         """
@@ -23,21 +25,25 @@ class Board:
         """
         for i in range(0, self.board_spaces):
             self.board.append(' -')
-        print(self.board)
     
     def displayBoard(self):
         """
             Displays the board in the CLI.
         """
         os.system('cls' if os.name == 'nt' else 'clear')
-        print(self.head)
+        if self.playerName == "Computer":
+            print(colored(self.__repr__(),'red'))
+        else:
+            print(colored(self.__repr__(), 'green'))
+        print(f'\n{self.head}')
         for row in range(0, self.board_size):
             # More to do here.
             print(row, "".join(self.board[(row*5):(row*5)+5]))
+        print(f'\n')
 
 # Define a class to represent a ship
 class Ship:
-    def __init__(self, type:str):
+    def __init__(self, type:str, board:object):
         self.type = type
         match self.type:
             case "carrier":
@@ -50,6 +56,9 @@ class Ship:
                 self.post_num = 1
         
         self.ship_coordinates = []
+        self.placeShip()
+        for coord in self.ship_coordinates:
+            board.all_ship_coordinates.append(coord)
         
 
     def __repr__(self):
@@ -70,7 +79,6 @@ class Ship:
             is_valid_ship_coordinates = checkShipCoordinates(coordinates, self.post_num)
             if is_valid_ship_coordinates:
                 # Insert all coordinates included between the two ends
-                print(coordinates)
                 # Determine which character matches
                 if coordinates[0][0] == coordinates[1][0]: # First character (letter) matches
                     static_first_character = coordinates[0][0]
@@ -87,7 +95,6 @@ class Ship:
                     final_first_character_index = allowed_letters.index(coordinates[1][0])
                     for index in range(initial_first_character_index,final_first_character_index+1):
                         self.ship_coordinates.append(f'{allowed_letters[index]}{static_second_character}')
-                print(self.ship_coordinates)
                 break
             else:
                 print(colored('Coordinates are invalid for this ship', 'red'))
@@ -173,8 +180,19 @@ def checkShipCoordinates(coordinates:list, ship_posts:int) -> bool:
         #continue
 
 # FUNCTIONS THAT HANDLE BOARD MANIPULATION
-# For now, commitFire should only send a fire action; checking for hit comes later.
-def commitFire(coordinate:str, board:object):
+
+def commitFire(coordinate:str, target_board:object):
+    """
+        This function performs the firing action on a target board's coordinate. It determines if the attack was a hit or miss and updates the board accordingly.
+
+        Parameters:
+            : str : coordinate - the location attacked
+            : object: target_board - the board being attacked
+        
+        Returns:
+            Displays the target board with updated hit or miss.
+
+    """
     allowed_letters = list(string.ascii_uppercase[:5])
     allowed_ints = ["0", "1", "2", "3", "4"]
     coordinate_list = []
@@ -182,16 +200,41 @@ def commitFire(coordinate:str, board:object):
         for letter in allowed_letters:
             coordinate_list.append(f'{letter}{integer}')
     board_index = coordinate_list.index(coordinate)
-    board.board[board_index] = " X"
+    target_board.board[board_index] = " X"
+    # The code below will be uncommented once the system for checking targets is complete
+    if attackBattleReport(coordinate, target_board):
+        target_board.board[board_index] = " X"
+        target_board.damage_count += 1
+    else:
+        target_board.board[board_index] = " O"
+
+def attackBattleReport(coordinate:str, target_board:object):
+    if coordinate in target_board.all_ship_coordinates:
+        return True
+    else:
+        return False
+
+def requestFire(target_board:object):
+    while True:
+        attack_coordinates = input("Enter coordinates to fire on: ")
+        if validateCoordinate(attack_coordinates):
+            commitFire(attack_coordinates,target_board)
+            target_board.displayBoard()
+            break
+        else:
+            print(colored("You entered invalid coordinates. Please provide valid coordinates.", "red"))
 
 
 # TESTING BOARD
-f_board = Board("Friendly")
-#f_board.displayBoard()
-commitFire("E1",f_board)
-commitFire("B4",f_board)
-commitFire("A0",f_board)
-f_board.displayBoard()
+c_board = Board("Computer")
+c_battleship = Ship("battleship",c_board)
+c_carrier = Ship("carrier", c_board)
+print(f'All ship coordinates on computer board: {c_board.all_ship_coordinates}')
+requestFire(c_board)
+print(f'All ship coordinates on computer board: {c_board.all_ship_coordinates}')
+requestFire(c_board)
+
+
 
 # TESTING SHIPS
 """ f_carrier = Ship("carrier")
