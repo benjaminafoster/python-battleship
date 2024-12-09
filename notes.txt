@@ -34,9 +34,16 @@ Future features:
     - User profiles with high scores
     - Single vs. multi-player
 
+Ship Placement Handling:
+    - Get coordinates
+    - Confirm the coordinates abide by rules (2 chars, first char is letter, second is number)
+    - Confirm that the distance between coordinates matches the number of posts on ship
+    - Determine if any of those coordinates are already taken on the target board
+    - If no coordinates already taken, assign to ship and assign to board, else prompt for new coordinates.
+    - Update friendly board with ship positions using "^" in place of "-"
 
-Thoughts:
-    12/5/2024:
-        - Flow of ship initialization: define intended ship -> define desired start and end coordinates -> validate coordinates -> pass valid coordinates into ship initialization
-            - This will require me to automatically fill all coordinates between start and end
-            - Also then need to create a check to make sure that ships don't overlap
+Game logic (as of 12/9/24):
+    Game initialization:
+        1. Player welcomed to the game and given initial rules and info.
+        2. Player prompted to enter coordinates of all ships on after the other.
+        3. Computer undergoes a background process of randomly placing ships (this has yet to be built)

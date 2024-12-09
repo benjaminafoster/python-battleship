@@ -3,6 +3,13 @@ from termcolor import colored
 import string
 import math
 
+# TODO: Implement coordinate check to make sure that no ships overlap. Takes place during ship validation
+    # Pseudo for this process:
+        # After passing and validating coordiantes, provide the coordinates to check function
+        # Loop through ship coordinates and see if any of those coordinates are already assigned to the board
+        # If not, reprompt the user to enter coordinates.
+        # Copy confirmed coordinate range to the applicable board and ship.
+
 # Define a class to represent a board
 class Board:
     def __init__(self, playerName:str):
@@ -76,7 +83,7 @@ class Ship:
         """
         while True:
             coordinates = getShipCoordinates()
-            is_valid_ship_coordinates = checkShipCoordinates(coordinates, self.post_num)
+            is_valid_ship_coordinates = confirmShipCoordinatesToPosts(coordinates, self.post_num)
             if is_valid_ship_coordinates:
                 # Insert all coordinates included between the two ends
                 # Determine which character matches
@@ -144,7 +151,7 @@ def getShipCoordinates():
             continue
     return shipCoordinates
 
-def checkShipCoordinates(coordinates:list, ship_posts:int) -> bool:
+def confirmShipCoordinatesToPosts(coordinates:list, ship_posts:int) -> bool:
     """
         Checks the distance between two coordinates and compares it to the number of posts for a ship. This is an important step in confirming ship placement at the start of the game.
 
@@ -201,7 +208,8 @@ def commitFire(coordinate:str, target_board:object):
             coordinate_list.append(f'{letter}{integer}')
     board_index = coordinate_list.index(coordinate)
     target_board.board[board_index] = " X"
-    # The code below will be uncommented once the system for checking targets is complete
+    
+    # Check if the given coordinate results in a hit or miss, then add the correct designator to the target board
     if attackBattleReport(coordinate, target_board):
         target_board.board[board_index] = " X"
         target_board.damage_count += 1
