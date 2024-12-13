@@ -3,9 +3,9 @@ from termcolor import colored
 import string
 import math
 
-# TODO: Implement coordinate check to make sure that no ships overlap. Takes place during ship validation
+# TODO: THE VERY NEXT THING TO DO!!! Implement coordinate check to make sure that no ships overlap. Takes place during ship validation
     # Pseudo for this process:
-        # After passing and validating coordiantes, provide the coordinates to check function
+        # After passing and validating coordinates, provide the coordinates to check function
         # Loop through ship coordinates and see if any of those coordinates are already assigned to the board
         # If not, reprompt the user to enter coordinates.
         # Copy confirmed coordinate range to the applicable board and ship.
