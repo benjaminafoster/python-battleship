@@ -3,12 +3,6 @@ from termcolor import colored
 import string
 import math
 
-# TODO: THE VERY NEXT THING TO DO!!! Implement coordinate check to make sure that no ships overlap. Takes place during ship validation
-    # Pseudo for this process:
-        # After passing and validating coordinates, provide the coordinates to check function
-        # Loop through ship coordinates and see if any of those coordinates are already assigned to the board
-        # If not, reprompt the user to enter coordinates.
-        # Copy confirmed coordinate range to the applicable board and ship.
 
 # Define a class to represent a board
 class Board:
@@ -64,9 +58,17 @@ class Ship:
         
         self.ship_coordinates = []
         self.placeShip()
+        # Compare the temp_ship_coordinates with those on the target board...if there are matches, ask for coordinate again.
         for coord in self.ship_coordinates:
-            board.all_ship_coordinates.append(coord)
-        
+            # If a proposed ship coordinate is in the coordinates already placed on the board, run the handleOverlap function, else continue to ship coordinate upload to board.
+            if coord in board.all_ship_coordinates:
+                self.handleOverlap(board)
+            else:
+                continue
+
+        # Upload ship coordinates to the board.                
+        for coord in self.ship_coordinates:
+                board.all_ship_coordinates.append(coord)
 
     def __repr__(self):
         return f'The type of ship you selected is a {self.type} which has {self.post_num} posts.'
@@ -104,8 +106,22 @@ class Ship:
                         self.ship_coordinates.append(f'{allowed_letters[index]}{static_second_character}')
                 break
             else:
-                print(colored('Coordinates are invalid for this ship', 'red'))
+                print(colored('Coordinates are invalid for this ship. Try again.', 'red'))
                 continue
+
+    def handleOverlap(self, board:object):
+        is_overlap = True
+        while is_overlap:
+            print(colored('The placement of this ship overlaps another previously placed ship. Try again.', 'red'))
+            self.ship_coordinates = []
+            self.placeShip()
+            for coord in self.ship_coordinates:
+                if coord in board.all_ship_coordinates:
+                    break
+                else:
+                    is_overlap = False
+        
+    
 
 # FUNCTIONS THAT HANDLE COORDINATE VALIDATION (USED IN BOTH SHIP PLACEMENT AND ATTACKS)
 
@@ -238,9 +254,8 @@ c_board = Board("Computer")
 c_battleship = Ship("battleship",c_board)
 c_carrier = Ship("carrier", c_board)
 print(f'All ship coordinates on computer board: {c_board.all_ship_coordinates}')
-requestFire(c_board)
-print(f'All ship coordinates on computer board: {c_board.all_ship_coordinates}')
-requestFire(c_board)
+# requestFire(c_board)
+# requestFire(c_board)
 
 
 
