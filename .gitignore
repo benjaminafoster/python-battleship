@@ -1,0 +1,6 @@
+# Directory exclusions
+venv/
+__pycache__/
+
+# File exclusions
+tests.py
