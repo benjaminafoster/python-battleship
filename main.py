@@ -14,11 +14,11 @@ def main():
         home_menu_selection = input(": ")
         
         if home_menu_selection == "1":
-            carrier = Carrier()
-            battleship = Battleship()
-            cruiser = Cruiser()
-            submarine = Submarine()
-            destroyer = Destroyer()    
+            carrier = Carrier("player1")
+            battleship = Battleship("player1")
+            cruiser = Cruiser("player1")
+            submarine = Submarine("player1")
+            destroyer = Destroyer("player1")    
         elif home_menu_selection == "2":
             os.system('cls' if os.name == 'nt' else 'clear')
             print("See you next time Captain!")

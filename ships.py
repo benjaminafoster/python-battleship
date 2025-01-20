@@ -20,9 +20,9 @@ class Ship():
     """
     letters_list = ['A','B','C','D','E','F','G','H','I','J']
 
-    def __init__(self):
+    def __init__(self, parent_board):
+        self.parent_board = parent_board
         self.ship_coordinates = []
-        self.damage = 0
         self.placeShip()
 
     # Override in individual ship type classes
@@ -93,36 +93,41 @@ class Ship():
                 new_letter_value = int(letter_value) + i
                 self.ship_coordinates.append(f"{str(Ship.letters_list[new_letter_value])}{number}")
 
-        print(self.ship_coordinates)
+        # print(self.ship_coordinates)
+    
+    def occupyCoordinate(self, coordinate:str, board):
+        coordinate_index = board.board_coordinates_list.index(coordinate)
+        board.board_coordinates_statuses_list[coordinate_index]['occupied'] = True
     
 class Carrier(Ship):
-    def __init__(self):
+    def __init__(self, parent_board):
         self.name = "carrier"
         self.post_count = 5
-        super().__init__()
+        super().__init__(parent_board)
 
 class Battleship(Ship):
-    def __init__(self):
+    def __init__(self, parent_board):
         self.name = "battleship"
         self.post_count = 4
-        super().__init__()
+        super().__init__(parent_board)
 
 class Cruiser(Ship):
-    def __init__(self):
+    def __init__(self, parent_board):
         self.name = "cruiser"
         self.post_count = 3
-        super().__init__()
-
-class Destroyer(Ship):
-    def __init__(self):
-        self.name = "destroyer"
-        self.post_count = 2
-        super().__init__()
+        super().__init__(parent_board)
 
 class Submarine(Ship):
-    def __init__(self):
+    def __init__(self, parent_board):
         self.name = "submarine"
         self.post_count = 3
-        super().__init__()
+        super().__init__(parent_board)
+
+class Destroyer(Ship):
+    def __init__(self, parent_board):
+        self.name = "destroyer"
+        self.post_count = 2
+        super().__init__(parent_board)
+
 
 
