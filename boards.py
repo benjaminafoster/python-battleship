@@ -13,7 +13,7 @@ class Board():
         for coordinate in self.board_coordinates_list:
             coordinate_dict = {
                 'coordinate': coordinate,
-                'occupied': False,
+                'occupied': False, # if a ship is placed on this coordinate, this attribute will be updated
                 'status': 0 # 0 = not fired, 1 = miss, 2 = hit
             }
             self.board_coordinates_statuses_list.append(coordinate_dict)
