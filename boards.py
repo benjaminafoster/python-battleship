@@ -26,7 +26,7 @@ class Board():
             None
 
         Returns:
-            None -- Ships with valide coordinates and don't overlap are placed on the board, with coodinate statuses updated accordingly in self.board_coordinates_statuses_list
+            None -- Ships with valid coordinates and don't overlap are placed on the board, with coodinate statuses updated accordingly in self.board_coordinates_statuses_list
         
         """
         ship_type_list = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
