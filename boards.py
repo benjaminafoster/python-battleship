@@ -17,7 +17,7 @@ class Board():
                 'status': 0 # 0 = not fired, 1 = miss, 2 = hit
             }
             self.board_coordinates_statuses_list.append(coordinate_dict)
-        # print(self.board_coordates_statuses_list)
+
 
     def createBoard(self):
         """ Called at start of game to walk through adding ships to the board.
@@ -31,6 +31,10 @@ class Board():
         """
         ship_type_list = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
         pass
+    
+    def getCoordinateOccupancy(self, coordinate):
+        coordinate_index = self.board_coordinates_list.index(coordinate)
+        return self.board_coordinates_statuses_list[coordinate_index]['occupied']
     
     def getCoordinateStatus(self, coordinate):
         coordinate_index = self.board_coordinates_list.index(coordinate)

@@ -27,8 +27,8 @@ class Ship():
 
     # Override in individual ship type classes
     def placeShip(self):
-        coordinates = []
         while True:
+            coordinates = []
             print(colored(f"Place a {self.name} which has {self.post_count} posts and must be positioned vertically or horizontally (no diagonals).", 'blue'))
             for i in range(0,2):
                 while True:
@@ -43,12 +43,21 @@ class Ship():
             
             if self.isValidateShipLength(coordinates):
                 print(colored(f"These ship coordinates are valid and match the length of a {self.name}.", 'green'))
-                break
             else:
                 print(colored(f"Invalid coordinates for this ship. Please try again", 'red'))
                 coordinates = []
+                continue
 
-        self.getAllShipCoordinates(coordinates)
+            self.getAllShipCoordinates(coordinates)
+            occupied_coordinates = list(filter(lambda coord: self.parent_board.getCoordinateOccupancy(coord), self.ship_coordinates))
+            if len(occupied_coordinates) != 0:
+                print(colored(f"\nThe following coordinates you provided for this ship are already taken: {occupied_coordinates}. Try again.\n", "red"))
+                self.ship_coordinates = []
+                occupied_coordinates = []
+            else:
+                for coord in self.ship_coordinates:
+                    self.occupyCoordinate(coord, self.parent_board)
+                break
 
     def isValidateShipLength(self, coordinate_list) -> bool:
         eucladian_points = []
