@@ -107,6 +107,7 @@ class Ship():
     def occupyCoordinate(self, coordinate:str, board):
         coordinate_index = board.board_coordinates_list.index(coordinate)
         board.board_coordinates_statuses_list[coordinate_index]['occupied'] = True
+        board.board_coordinates_statuses_list[coordinate_index]['status'] = "S"
     
 class Carrier(Ship):
     def __init__(self, parent_board):

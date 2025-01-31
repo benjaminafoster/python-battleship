@@ -1,10 +1,13 @@
+import os
+from termcolor import colored
 from ships import Ship
 
 class Board():
     letters_list = ['A','B','C','D','E','F','G','H','I','J']
     numbers_list = ['0','1','2','3','4','5','6','7','8','9']
 
-    def __init__(self):
+    def __init__(self, type):
+        self.type = type
         self.board_coordinates_list = []
         self.board_coordinates_statuses_list = []
         for number in Board.numbers_list:
@@ -13,24 +16,10 @@ class Board():
         for coordinate in self.board_coordinates_list:
             coordinate_dict = {
                 'coordinate': coordinate,
-                'occupied': False, # if a ship is placed on this coordinate, this attribute will be updated
-                'status': 0 # 0 = not fired, 1 = miss, 2 = hit
+                'occupied': False, # coordinate's occupancy only matters for ship placement and when firing
+                'status': "~" # ~ = not fired, O = miss, S = ship on X = hit
             }
             self.board_coordinates_statuses_list.append(coordinate_dict)
-
-
-    def createBoard(self):
-        """ Called at start of game to walk through adding ships to the board.
-
-        Args:
-            None
-
-        Returns:
-            None -- Ships with valid coordinates and don't overlap are placed on the board, with coodinate statuses updated accordingly in self.board_coordinates_statuses_list
-        
-        """
-        ship_type_list = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer']
-        pass
     
     def getCoordinateOccupancy(self, coordinate):
         coordinate_index = self.board_coordinates_list.index(coordinate)
@@ -40,5 +29,28 @@ class Board():
         coordinate_index = self.board_coordinates_list.index(coordinate)
         return self.board_coordinates_statuses_list[coordinate_index]['status']
 
+    def displayBoard(self):
+        clear_screen()
+        row_count = 0
+        status_list_copy = self.board_coordinates_statuses_list.copy()
+        print(colored(f"{self.type} Board:\n", "green"))
+        print(f"  {' '.join(self.letters_list)}")
+
+        def write_row(row_index):
+            row_start_index = row_index *10
+            return list(map(lambda coord: coord["status"],status_list_copy[row_start_index : row_start_index + 10]))
+
+        while row_count < 10:
+            row_string = " ".join(write_row(row_count))
+            print(f"{row_count} {row_string}")
+            row_count += 1
+            
+def clear_screen():
+    if os.name == 'nt':
+        # Clear command for Windows...
+        os.system('cls')
+    else:
+        #... for macOS or Linux
+        os.system('clear')
     
 
