@@ -30,10 +30,9 @@ class Board():
         return self.board_coordinates_statuses_list[coordinate_index]['status']
 
     def displayBoard(self):
-        clear_screen()
         row_count = 0
         status_list_copy = self.board_coordinates_statuses_list.copy()
-        print(colored(f"{self.type} Board:\n", "green"))
+        print(colored(f"\n{self.type} Board:\n", "green"))
         print(f"  {' '.join(self.letters_list)}")
 
         def write_row(row_index):
@@ -45,12 +44,6 @@ class Board():
             print(f"{row_count} {row_string}")
             row_count += 1
             
-def clear_screen():
-    if os.name == 'nt':
-        # Clear command for Windows...
-        os.system('cls')
-    else:
-        #... for macOS or Linux
-        os.system('clear')
+
     
 
