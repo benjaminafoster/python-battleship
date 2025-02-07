@@ -3,10 +3,7 @@ import regex
 class Coordinate():
     def __init__(self):
         self.test = input("Enter a coordinate: ")
-        self.validateCoordinate(self.test)
-
-    def __str__(self):
-        return f"{self.test}"
+        self.validateCoordinate(self.test) 
 
     def validateCoordinate(self, test_coordinate:str) -> str:
         valid_pattern = regex.compile(r"[A-J][0-9]")
@@ -16,3 +13,6 @@ class Coordinate():
             return str(self.test)
         else:
             raise Exception("Invalid coordinate")
+
+    def __repr__(self):
+        return f"{self.test}"
