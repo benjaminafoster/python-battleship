@@ -21,7 +21,7 @@ def fire(enemy_board, friendly_targeting_board):
         case _:
             print("Coordinate already guessed. No effect.")
 
-def clear_screen():
+def clearScreen():
     if os.name == 'nt':
         # Clear command for Windows...
         os.system('cls')
