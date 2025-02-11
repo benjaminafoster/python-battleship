@@ -2,7 +2,7 @@ from termcolor import colored
 from boards import *
 from coordinate import *
 
-def fire(enemy_board, friendly_targeting_board):
+'''def fire(enemy_board, friendly_targeting_board):
     print(colored("You've selected to fire on a target.", "blue"))
     coordinate = str(Coordinate())
     coordinate_status = enemy_board.getCoordinateStatus(coordinate)
@@ -19,7 +19,7 @@ def fire(enemy_board, friendly_targeting_board):
             friendly_targeting_board.board_coordinates_statuses_list[coordinate_index]["status"] = "O"
 
         case _:
-            print("Coordinate already guessed. No effect.")
+            print("Coordinate already guessed. No effect.")'''
 
 def clearScreen():
     if os.name == 'nt':
