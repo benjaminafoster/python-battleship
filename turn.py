@@ -15,6 +15,8 @@ class Turn():
             if player_turn_selection == "f":
                 turn_status = 1
                 while turn_status and self.hits != 17:
+                    clearScreen()
+                    targeting_board.displayBoard()
                     try:
                         turn_status = self.fire(enemy_board, targeting_board)
                         if turn_status == 1: # if turn status is still 1 after firing, that means a hit ocurred
