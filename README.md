@@ -2,6 +2,8 @@
 
 This is a simple remake of the classic naval combat game, Battleship; this time on the command line. Best part about it is, you can run it anywhere you can run Python!
 
+![main menu](/docs/assets/menu.png)
+
 ## Getting Started
 
 The following instructions will guide you through the process of downloading and running this project on your own machine. Although the given commands are written from a Linux perspective, use your system's standard package managers to meet the prerequisites and execute subsequent commands.
