@@ -1,6 +1,7 @@
 # Directory exclusions
 venv/
 __pycache__/
+.github/
 
 # File exclusions
 tests.py
