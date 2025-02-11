@@ -36,7 +36,7 @@ class Ship():
                         coordinate = Coordinate()
                         coordinates.append(str(coordinate))
                         break
-                    except Exception as e:
+                    except ValueError as e:
                         print(f"{e}...try again.")
 
             # If the following check is true, we know that the coordinates are valid format, and that the coordinates match the ship length and are in a proper orientation

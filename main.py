@@ -12,6 +12,16 @@ from actions import *
 def main():
     clearScreen()
     print("Welcome to Terminal Battleships!\n")
+    print('''\n
+                    ____
+                 ___|__|___    __
+           _____|__________|__|__
+           \                    /
+            \   USS WINSTON    /
+             \________________/
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    \n
+    ''')
     print("\nIf you're brave enough, its time to enter the wide ocean and engage in your favorite game of (digital) naval combat.\n")
     try:
         while True: 
@@ -30,6 +40,7 @@ def main():
                 player_number = 1
                 for player_board in player_ship_boards:
                     print(colored(f"Starting ship deployment for Player {player_number}", "green"))
+                    player_board.displayBoard()
                     Carrier(player_board)
                     clearScreen()
                     player_board.displayBoard()
@@ -68,9 +79,9 @@ def main():
                         player_2_hits = Turn(p1s_board, p2t_board, player_2_hits).hits
                         player_turn = 1
                 if player_1_hits == 17:
-                    print(colored("Player 1 sank all of Player 2's ships and wins!", "green"))
+                    print(colored("\nPlayer 1 sank all of Player 2's ships and wins!\n", "green"))
                 else:
-                    print(colored("Player 2 sank all of Player 1's ships and wins!", "green"))
+                    print(colored("\nPlayer 2 sank all of Player 1's ships and wins!\n", "green"))
                 print(f"If you'd like to play again restart the game from the command line. Otherwise, thanks for playing!")
                 input("Press enter to quit.")
                 clearScreen()

@@ -15,9 +15,12 @@ class Turn():
             if player_turn_selection == "f":
                 turn_status = 1
                 while turn_status and self.hits != 17:
-                    turn_status = self.fire(enemy_board, targeting_board)
-                    if turn_status == 1: # if turn status is still 1 after firing, that means a hit ocurred
-                        self.hits += 1
+                    try:
+                        turn_status = self.fire(enemy_board, targeting_board)
+                        if turn_status == 1: # if turn status is still 1 after firing, that means a hit ocurred
+                            self.hits += 1
+                    except ValueError as e:
+                        print(f"{e}...Try again.")
                 clearScreen()
                 print(f"You missed and now have 10 seconds to pass the controls over to the other player...")
                 time_count = 10
@@ -55,4 +58,4 @@ class Turn():
             case _:
                 print("Coordinate already guessed. No effect.")
                 return 0
-    
+        

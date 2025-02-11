@@ -12,7 +12,7 @@ class Coordinate():
         if regex.fullmatch(valid_pattern, test_coordinate):
             return str(self.test)
         else:
-            raise Exception("Invalid coordinate")
+            raise ValueError("Invalid coordinate")
 
     def __repr__(self):
         return f"{self.test}"
