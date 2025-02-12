@@ -82,10 +82,13 @@ def main():
                     print(colored("\nPlayer 1 sank all of Player 2's ships and wins!\n", "green"))
                 else:
                     print(colored("\nPlayer 2 sank all of Player 1's ships and wins!\n", "green"))
-                print(f"If you'd like to play again restart the game from the command line. Otherwise, thanks for playing!")
-                input("Press enter to quit.")
-                clearScreen()
-                break
+                end_game_choice = input(f'If you\'d like to quit, type "q" and then hit enter, otherwise hit enter to continue. ')
+                end_game_choice = end_game_choice.lower()
+                if end_game_choice == "q":
+                    clearScreen()
+                    break
+                else:
+                    continue
             elif home_menu_selection == "2":
                 clearScreen()
                 print(colored("See you next time Captain!", "green"))
