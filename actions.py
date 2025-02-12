@@ -26,7 +26,7 @@ def playSound(sound):
     if sound == "hit":
         playaudio("./assets/explosion_sound.mp3")
     elif sound == "miss":
-        pass
+        playaudio("./assets/splash_sound.mp3")
     else:
         pass
 

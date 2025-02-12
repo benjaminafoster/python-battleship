@@ -55,6 +55,8 @@ class Turn():
                 return 1
             case "~":
                 print("Miss")
+                t2 = threading.Thread(target=playSound, args=("miss",))
+                t2.start()
                 coordinate_index = enemy_board.board_coordinates_list.index(coordinate)
                 enemy_board.board_coordinates_statuses_list[coordinate_index]["status"] = "O"
                 targeting_board.board_coordinates_statuses_list[coordinate_index]["status"] = "O"
