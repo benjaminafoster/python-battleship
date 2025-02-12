@@ -1,6 +1,8 @@
 # Directory exclusions
 venv/
 __pycache__/
+.vscode/
 
 # File exclusions
 tests.py
+run.sh
