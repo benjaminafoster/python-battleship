@@ -24,7 +24,7 @@ from playaudio import playaudio
 
 def playSound(sound):
     if sound == "hit":
-        playaudio("/assets/explosion_sound.mp3")
+        playaudio("./assets/explosion_sound.mp3")
     elif sound == "miss":
         pass
     else:
