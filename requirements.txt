@@ -1,2 +1,3 @@
 regex == 2024.11.6
 termcolor == 2.5.0
+playaudio == 1.0.5

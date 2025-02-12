@@ -1,6 +1,7 @@
 from termcolor import colored
 from boards import *
 from coordinate import *
+from playaudio import playaudio
 
 '''def fire(enemy_board, friendly_targeting_board):
     print(colored("You've selected to fire on a target.", "blue"))
@@ -20,6 +21,14 @@ from coordinate import *
 
         case _:
             print("Coordinate already guessed. No effect.")'''
+
+def playSound(sound):
+    if sound == "hit":
+        playaudio("./explosion_sound.mp3")
+    elif sound == "miss":
+        pass
+    else:
+        pass
 
 def clearScreen():
     if os.name == 'nt':
