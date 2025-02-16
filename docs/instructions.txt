@@ -1,0 +1,17 @@
+*************************************************
+*       Terminal Battleship Instructions        *
+*************************************************
+
+Terminal battleship follows a classic battleship game flow. Players first take turns placing their ships and then begin firing on each other. The following instructions outline the specific game-flow implementations for this version of Terminal Battleship.
+
+** Ship Deployment **
+
+Each player gets an opportunity to place their ships, first player 1, then player 2. Each player places all of their ships before the next. The opposing player should not see where the other's ships are placed as this would give an unfair advantage during combat. 
+
+The player deploys each ship in sequence: carrier (5 posts), battleship (4 posts), cruiser (3 posts), submarine (3 posts), and destroyer (2 posts). When prompted, the player designates where the front and rear post will be for the ship using the desired coordinate. Ships cannot overlap each other, nor can the partially off the board.
+
+** Combat **
+
+Once ship deployment is done, player 1 begins by guessing coordinates that the opposing player has placed their ships on. If the player that is firing hits a coordinate where an enemy ship is placed, they continue firing until they miss. The only events in which a player end's their firing are on a miss or if they target a coordinate they already fired upon. 
+
+Since there are a total of 17 posts across the 5 ships, the total number of hits a player can achieve is 17. The first player to reach 17 points wins the game. 

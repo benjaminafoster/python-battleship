@@ -25,9 +25,7 @@ def main():
     print("\nIf you're brave enough, its time to enter the wide ocean and engage in your favorite game of (digital) naval combat.\n")
     try:
         while True: 
-            print("[1] Begin game")
-            print("[2] Quit")
-            home_menu_selection = input(": ")
+            home_menu_selection = input("[1] Begin game\n[2] Read instructions\n[3] Quit\n: ")
             
             if home_menu_selection == "1":
                 clearScreen()
@@ -88,8 +86,17 @@ def main():
                     clearScreen()
                     break
                 else:
+                    clearScreen()
                     continue
             elif home_menu_selection == "2":
+                if os.name == 'nt':
+                    # Read instructions on Windows...
+                    os.system("more ./docs/instructions.txt")
+                else:
+                    #... on macOS or Linux
+                    os.system("less ./docs/instructions.txt")
+                    clearScreen()
+            elif home_menu_selection == "3":
                 clearScreen()
                 print(colored("See you next time Captain!", "green"))
                 break
