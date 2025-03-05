@@ -5,7 +5,7 @@ from termcolor import colored
 from coordinate import *
 from ships import *
 from boards import *
-from turn import *
+from turn import Turn
 from actions import *
 
 
