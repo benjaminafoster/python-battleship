@@ -54,9 +54,3 @@ of conduct, and the process for submitting pull requests to us.
 ## Authors
 
   - **Ben Foster** -- a wannabe.
-
-## Acknowledgments
-
-  - Hat tip to anyone whose code is used
-  - Inspiration
-  - etc
